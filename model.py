@@ -29,7 +29,7 @@ class User(db.Model):
         return f"<User user_id={self.user_id} email={self.email}>"
 
 
-class Movies(db.Model):
+class Movie(db.Model):
 
     __tablename__ = "movies"
 
@@ -39,13 +39,13 @@ class Movies(db.Model):
     imdb_url = db.Column(db.String(), nullable=False)
 
 
-class Ratings(db.Model):
+class Rating(db.Model):
 
     __tablename__ = "ratings"
 
     rating_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    movie_id = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, nullable=False)
+    movie_id = db.Column(db.Integer, nullable=False)
     score = db.Column(db.Integer, nullable=False)
 
 
