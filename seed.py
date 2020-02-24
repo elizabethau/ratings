@@ -1,13 +1,11 @@
 """Utility file to seed ratings database from MovieLens data in seed_data/"""
 
 from sqlalchemy import func
-from model import User
-from model import Rating
-from model import Movie
 
+from model import User, Rating, Movie
 from model import connect_to_db, db
-from server import app
 
+from server import app
 from datetime import datetime
 
 
@@ -50,11 +48,11 @@ def load_movies():
         shortened = title.split(" ")
         title = " ".join(shortened[:-1])
 
-        date_str = released_at
-        formatted = "%d-%b-%y"
+        date_string = released_at
+        formatted = "%d-%b-%Y"
 
-        released = datetime.strptime(date_str, formatted)
-        # print(released) this is where the issue is!
+        released = datetime.strptime(date_string, formatted)
+
         movie = Movie(movie_id=movie_id,
                       title=title,
                       released_at=released,
@@ -78,7 +76,7 @@ def load_ratings():
 
         rating = Rating(user_id=user_id,
                         movie_id=movie_id,
-                        timestamp=timestamp)
+                        score=score)
 
         db.session.add(rating)
 
